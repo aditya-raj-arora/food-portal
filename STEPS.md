@@ -40,15 +40,15 @@ cd food-portal
 git init -b main
 git add .
 git commit -m "Online food ordering portal v1.0.0"
-git remote add origin https://github.com/<github-user>/food-portal.git
+git remote add origin https://github.com/aditya-raj-arora/food-portal.git
 git push -u origin main
 ```
 
 ## Step 2 – Build the image and test locally
 
 ```bash
-docker build --build-arg APP_VERSION=v1.0.0 -t <dockerhub-user>/food-portal:v1.0.0 -t <dockerhub-user>/food-portal:latest .
-docker run -d --name food-local -p 8080:80 <dockerhub-user>/food-portal:v1.0.0
+docker build --build-arg APP_VERSION=v1.0.0 -t adityarajarora123/food-portal:v1.0.0 -t adityarajarora123/food-portal:latest .
+docker run -d --name food-local -p 8081:80 adityarajarora123/food-portal:v1.0.0
 docker exec -i food-local sh -s http://127.0.0.1 v1.0.0 < tests/smoke-test.sh
 ```
 
@@ -58,8 +58,8 @@ Open **http://localhost:8080** and check the page, then `docker rm -f food-local
 
 ```bash
 docker login
-docker push <dockerhub-user>/food-portal:v1.0.0
-docker push <dockerhub-user>/food-portal:latest
+docker push adityarajarora123/food-portal:v1.0.0
+docker push adityarajarora123/food-portal:latest
 ```
 
 ## Step 4 – Create the Kubernetes Deployment (3 replicas)
@@ -158,9 +158,9 @@ Jenkins picks up the commit and automatically: builds `food-portal:v1.0.<build>`
 Manual equivalent (for the record):
 
 ```bash
-docker build --build-arg APP_VERSION=v1.1.0 -t <dockerhub-user>/food-portal:v1.1.0 .
-docker push <dockerhub-user>/food-portal:v1.1.0
-kubectl set image deployment/food-portal-blue food-portal=<dockerhub-user>/food-portal:v1.1.0
+docker build --build-arg APP_VERSION=v1.1.0 -t adityarajarora123/food-portal:v1.1.0 .
+docker push adityarajarora123/food-portal:v1.1.0
+kubectl set image deployment/food-portal-blue food-portal=adityarajarora123/food-portal:v1.1.0
 kubectl rollout status deployment/food-portal-blue
 curl http://localhost:30083                                         # validate on preview
 kubectl set selector service food-portal app=food-portal,version=blue

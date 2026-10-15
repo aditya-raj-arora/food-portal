@@ -31,6 +31,7 @@ check 'id="menu"' "Menu section"
 check 'class="price"' "Menu prices"
 check 'class="status' "Availability labels"
 check 'id="offers"' "Promotional offers section"
+check 'id="thank-you"' "Thank-you message"
 
 if wget -q --spider "$BASE_URL/styles.css"; then
     echo "PASS  Stylesheet is served"
